@@ -1,0 +1,15 @@
+{
+  "name": "cli-seo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start-deploy": "npm run build-deploy && nodemon ./deploy/server/app.js",
+    "build-deploy": "node ./build.js",
+    "server-install": "cd server && npm install && cd .."
+  },
+  "author": "John Livingston",
+  "license": "ISC",
+  "devDependencies": {
+    "fs-extra": "^4.0.1"
+  }
+}

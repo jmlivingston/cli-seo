@@ -1,0 +1,13 @@
+{
+  "name": "cli-seo",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./app.js",
+    "postinstall": "npm install express serve-favicon"
+  },
+  "dependencies": {
+    "express": "~4.15.2",
+    "serve-favicon": "^2.4.3"
+  }
+}
