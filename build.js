@@ -18,9 +18,9 @@ const clientDir = buildDirs.find(buildDir => {
 })
 // END
 
-if (!clientDir) {
+if (!fs.pathExistsSync(clientDir)) {
   throw new Error('Can\'t find build folder. Did you run the CLI build first?')
 }
-fs.emptyDirSync('./deploy')
+fs.emptyDirSync(deployDir)
 fs.copySync(clientDir, path.join(deployDir, 'client'))
-fs.copySync(serverDir, path.join(deployDir, 'server'))
+fs.copySync(serverDir, path.join(deployDir))

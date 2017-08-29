@@ -5,11 +5,11 @@ function getSeoFromFile (url) {
   return seoData.paths[url]
     ? {
       title: seoData.titlePrefix + (seoData.paths[url].title || seoData.paths.default.title),
-      meta: { ...seoData.paths.default.meta, ...seoData.paths[url].meta }
+      meta: Object.assign(seoData.paths.default.meta, seoData.paths[url].meta)
     }
     : {
       title: seoData.titlePrefix + seoData.paths.default.title,
-      meta: { ...seoData.paths.default.meta }
+      meta: seoData.paths.default.meta
     }
 }
 
