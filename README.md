@@ -111,7 +111,9 @@ Testing SEO can often be tricky due to caching, but the following SEO Validators
 
 ## Client Side SEO
 
-This project is focused on server side rendering of meta tags, but you may still need to update this on the client side if you're using a SPA, especially if you want the title updated or rely on sharing libraries that read the meta tags. Here are two code snippets for you can use to integrate with client side routing events.
+This project is focused on server side rendering of meta tags, but you still need to update this on the client side if you're using a SPA. You will want to update the title and may rely on sharing libraries that read the meta tags. Here are two code snippets for you can use to integrate with client side routing events.
+
+> **Note** - Since this project does not handle this, you will notice in SPAS that the values don't update. You can refresh the page to see the server rendered change.
 
 ```javascript
 updateMetaTag(attribute, attributeValue, contentValue) {
@@ -138,4 +140,12 @@ updateTitle(title) {
   }
 ```
 
-> **Note**: If you're using React, you might look into NFL's open source project <a target="_blank" title="react-helmet" href="https://github.com/nfl/react-helmet">react-helmet</a>
+> **Note**: If you're using React, checkout NFL's open source project <a target="_blank" title="react-helmet" href="https://github.com/nfl/react-helmet">react-helmet</a>
+
+## Examples
+
+The following are two basic examples using **<a target="_blank" title="create-react-app" href="https://github.com/facebookincubator/create-react-app">create-react-app</a>** and **<a target="_blank" title="angular-cli" href="https://github.com/angular/angular-cli">angular-cli</a>**.
+
+<a target="_blank" title="cli-seo-angular-cli" href="https://github.com/jmlivingston/cli-seo-angular-cli">cli-seo-angular-cli</a>
+
+<a target="_blank" title="cli-seo-create-react-app" href="https://github.com/jmlivingston/cli-seo-create-react-app">cli-seo-create-react-app</a>
