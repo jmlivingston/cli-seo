@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start-deploy": "npm run build-deploy && nodemon ./deploy/server/app.js",
     "build-deploy": "node ./build.js",
-    "server-install": "cd server && npm install && cd .."
+    "server-install": "cd server && npm install && cd ..",
+    "start-deploy": "npm run build-deploy && nodemon ./deploy/server/app.js"
   },
   "author": "John Livingston",
   "license": "ISC",

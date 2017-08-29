@@ -10,6 +10,7 @@ function getSeoFromFile (url) {
 function seoViewEngine (filePath, options, callback) {
   fs.readFile(filePath, 'utf8', function (error, fileContents) {
     if (error) return callback(error)
+    // Note: This can pull from a database or routing class intead
     const seo = getSeoFromFile(options.url)
     for (const prop in seo) {
       if (prop === 'title') {
