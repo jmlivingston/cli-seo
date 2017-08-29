@@ -4,7 +4,7 @@ const path = require('path')
 const clientDir = path.join(__dirname, 'build') // create-react-app - build, angular-cli - dist, ember-cli - ?
 const serverDir = path.join(__dirname, 'server')
 const deployDir = path.join(__dirname, 'deploy')
-const indexFileName = path.join(deployDir, 'client', 'index.html')
+const indexFileName = path.join(clientDir, 'index.html')
 const separator = '\n\t' //Empty to minify or \n\t for carriage return and tab
 
 const metaValues = [
@@ -43,6 +43,6 @@ fs.readFile(indexFileName, 'utf8', function (error, fileContents) {
     console.log('Could not find ' + indexFileName + '. Have you run the CLI build first?')
     return callback(error)
   }
-  fileContents = fileContents.replace('<head>', '<head>' + separator + metaTags)
+  fileContents = fileContents.replace('<head>', '<head>' + separator + metaTags + separator)
   fs.writeFile(indexFileName, fileContents, 'utf8')
 })
