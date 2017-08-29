@@ -22,26 +22,30 @@ npm run server-install
 npm run start-deploy
 ```
 
-## Integration with CLI projects 
+## Integration and Running on CLI projects
 
 The following are based on **<a target="_blank" title="create-react-app" href="https://github.com/facebookincubator/create-react-app">create-react-app</a>** or **<a target="_blank" title="angular-cli" href="https://github.com/angular/angular-cli">angular-cli</a>**, but you can use similar steps with other CLI projects or static site generators. Essentially anything that builds out an index.html and related minified and compressed files.
 
+### Installing
+
 After creating your app using ```create-react-app``` or ```ng-new```, do the following:
 
-- Copy the **server** directory
-- Copy the **scripts** values from package.json
-- Copy build.js
-- Add the following to .gitignore:
-  - /deploy
-  - /server/node_modules
-- Install fs-extra. (used by build.js to copy directories)
+1. Copy the **server** directory
+2. Copy the **scripts** values from package.json
+3. Copy **build.js**
+4. Add the following to .gitignore:
 
-```npm install fs-extra --save-dev```
+```bash
+/deploy
+/server/node_modules
+```
 
-- To test bsaic routing, you can copy and paste the links in build\index.html
-- Run the following scripts:
-  - Both CLIs use the first one to build
-  - The second two are for testing the Express app locally
+5. Run ```npm install fs-extra --save-dev```. (Used by build.js to copy directories.)
+6. Optional - To test basic routing, copy and paste the links in build\index.html
+
+### Running
+
+- Run the following scripts. Both CLIs use the first for building. The second two are for testing the Express app locally.
 
 ```bash
 npm run build
@@ -49,7 +53,7 @@ npm run server-install
 npm run start-deploy
 ```
 
-- If you just want to build, run the following:
+### Building
 
 ```bash
 npm run build
@@ -58,32 +62,37 @@ npmr run build-deploy
 
 ## File Structure
 
-- **build.js** - This does two primary things
-  - creates a deploy directory using files copied from the client build directory and server directory
-  - updated the index.html file with placeholder meta tags. These get replaced using the custom SEO view engine (seoViewEngin.js) below.
+### build.js
 
-> **Note**: I tailored this to handle **<a target="_blank" title="create-react-app" href="https://github.com/facebookincubator/create-react-app">create-react-app</a>** and **angular-cli**, but if you know which one you're using, remove the setup code at the top and just set the clientDir variable. **<a target="_blank" title="create-react-app" href="https://github.com/facebookincubator/create-react-app">create-react-app</a>** generates code in the **build** directory and **<a target="_blank" title="angular-cli" href="https://github.com/angular/angular-cli">angular-cli</a>** uses the **dist** directory.
+Creates a deploy directory using files copied from the client build directory and server directory
 
-- package.json - Three npm scripts are used by the project:
-  - **build-deploy** - builds a deployment folder based on what the CLI generates and what is in the server folder.
-  - **server-install** - used for installing server packages locally
-  - **start-deploy** - builds and starts locally
-- server - contains all server side code:
-  - **app.js** - simple Express server which relies on a custom view engine (seoViewEngine.js) for rendering the meta tags. (Note: I kept this as minimal as possible. Consider <a target="_blank" title="Express Generator" href="https://expressjs.com/en/starter/generator.html">Express Generator</a> or <a target="_blank" title="Koa" href="http://koajs.com/">Koa</a> for something more sophisticated.)
+> **Attention** See notes in code. By default this handles either **<a target="_blank" title="create-react-app" href="https://github.com/facebookincubator/create-react-app">create-react-app</a>** or **<a target="_blank" title="angular-cli" href="https://github.com/angular/angular-cli">angular-cli</a>**, but this code should be removed if you know what you're using.
+
+### package.json
+
+Three npm scripts are used by the project:
+
+1. **build-deploy** - creates a **deploy** folder and copies the CLI build folder and the server folder. This is your deployment package.
+2. **server-install** - (optional) - installs server packages to test locally.
+3. **start-deploy** - builds and starts locally. Run previous step if using this option.
+
+### server directory
+
+Contains all server side Express code:
+
+**app.js** - Express server which relies on a custom view engine (seoViewEngine.js) for rendering the meta tags. (Note: I kept this as minimal as possible. Consider <a target="_blank" title="Express Generator" href="https://expressjs.com/en/starter/generator.html">Express Generator</a> or <a target="_blank" title="Koa" href="http://koajs.com/">Koa</a> for something more sophisticated.)
 
 > **Note**: You may need to tweak the **isStatic** method as necessary depending on the underlying tool you're using.
 
-  - **seoViewEngine.js** - view engine for reading from file and the placeholder meta tags created by **build.js** above.
+**seoViewEngine.js** - custom Express view engine for reading from the **seoData.js** file and adding meta tags to index.html.
 
-  > **Note** -  Currently this is based on a simple data file (seoData.js), but can be easily augmented to pull from a database or routing class. This is really where this gets interesting.
+> **Note** -  If your SEO data is static, you could make this more performant by adding simple caching logic here.
 
-  - **seoData.js** - This contains a title prefix and then URL paths that specify meta data for each. All paths inherit from the default path, so they can override specific properties. Anything omitted will use the default property.
-
-> **Very Important**: meta values specified in build.js must be provided by the seoViewEngine.js. I have included some of the more common ones, but you may need to add or remove as is necessary.
+**seoData.js** - This contains a title prefix and then URL paths that specify a title and meta properties for each. All paths inherit from the default path, so they can override or ignore specific properties.
 
 ## Deployment
 
-One you have build the project, deployment should be pretty straight-forward. The package.json includes a postinstall npm script and an engines configuration which you can tweak.
+One you have built the project, deployment should be pretty straight-forward. The package.json includes a postinstall npm script and an engines configuration which you can tweak.
 
 > **Heroku**: If you are using Heroku's awesome GitHub integration, you can simply push a subtree to your GitHub repository, and then use manual or automatic deployments. I typically use the following script which creates a **deploy** subtree which I can deploy with.
 
@@ -102,7 +111,7 @@ Testing SEO can often be tricky due to caching, but the following SEO Validators
 
 ## Client Side SEO
 
-This project is focused on server side rendering of meta tags, but you may still need to update this on the client side if you're using a SPA, especially if you rely on sharing libraries that read the meta tags. Here is a simple code snippet you can use to update your meta tags.
+This project is focused on server side rendering of meta tags, but you may still need to update this on the client side if you're using a SPA, especially if you want the title updated or rely on sharing libraries that read the meta tags. Here are two code snippets for you can use to integrate with client side routing events.
 
 ```javascript
 updateMetaTag(attribute, attributeValue, contentValue) {
@@ -116,6 +125,17 @@ updateMetaTag(attribute, attributeValue, contentValue) {
     htmlElement.setAttribute('content', contentValue);
   }
 }
+
+updateTitle(title) {
+    this.title.setTitle(title);
+    let htmlElement: document.querySelector('meta[title]');
+    if (!htmlElement) {
+      htmlElement = document.createElement('meta');
+      htmlElement.setAttribute('title', title);
+    } else {
+      htmlElement.setAttribute('title', title);
+    }
+  }
 ```
 
 > **Note**: If you're using React, you might look into NFL's open source project <a target="_blank" title="react-helmet" href="https://github.com/nfl/react-helmet">react-helmet</a>
