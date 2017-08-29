@@ -2,7 +2,7 @@ const seoData = {
   titlePrefix: 'AwesomeSite.com - ',
   paths: {
     default: {
-      'title': 'This is an Awesome Site',
+      'title': 'Home',
       'description': 'About walking dogs, running, and learning Japanese',
       'google-site-verification': '0d7dcd2b-6110-4a91-afea-c9754c4f772a',
       'keywords': 'dogs, running, Japanese',
@@ -22,17 +22,17 @@ const seoData = {
       'og:url': 'https://www.example.com'
     },
     '/todo/1': {
-      'title': 'Walk the dog',
-      'description': 'Lasso a beast and having it yank you around.',
+      'title': 'Todo 1',
+      'description': 'This is my first todo',
       'twitter:url': 'https://www.example.com',
     },
     '/todo/2': {
-      'title': 'Run the lake',
-      'description': 'Self abuse of the worst kind.'
+      'title': 'Todo 2',
+      'description': 'This is my second todo'
     },
     '/todo/3': {
-      'title': 'Learn to read Japanese',
-      'description': 'Learn 46 hiragana, 46 katakana, then 2,000 Chinese characters'
+      'title': 'Todo 3',
+      'description': 'This is my third todo'
     }
   }
 }

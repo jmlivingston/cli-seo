@@ -6,12 +6,13 @@ const seoViewEngine = require('./seoViewEngine.js')
 
 const clientDir = path.join(__dirname, '..', 'client')
 const serverDir = path.join(__dirname, '..', 'server')
-const port = process.env.PORT || '3000'
+const port = process.env.PORT || '3001'
 
 const app = express()
 
 const isStatic = req => {
-  return req.url.includes('/static/')
+  // Note: Adjust as necessary.
+  return req.url.includes('.') && !req.url.includes('index.html')
 }
 
 app.engine('html', seoViewEngine)
