@@ -6,7 +6,7 @@ const seoViewEngine = require('./seoViewEngine.js')
 
 const clientDir = path.join(__dirname, '..', 'client')
 const serverDir = path.join(__dirname, '..', 'server')
-const port = process.env.PORT || '3001'
+const port = process.env.PORT || '4000'
 
 const app = express()
 

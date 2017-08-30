@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build-deploy": "node ./build.js",
     "server-install": "cd server && npm install && cd ..",
+    "build-deploy": "node ./build.js",    
     "start-deploy": "npm run build-deploy && nodemon ./deploy/server/app.js"
   },
   "author": "John Livingston",

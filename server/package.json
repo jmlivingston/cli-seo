@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./server/app.js",
-    "postinstall": "npm install express serve-favicon"
+    "postinstall": "npm install express serve-favicon qs"
   },
   "dependencies": {
-    "express": "~4.15.2",
+    "express": "^4.15.4",
+    "qs": "^6.5.0",
     "serve-favicon": "^2.4.3"
   },
   "engines": {
